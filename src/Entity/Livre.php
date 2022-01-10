@@ -6,6 +6,7 @@ use App\Repository\LivreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LivreRepository::class)
@@ -20,7 +21,8 @@ class Livre
     private $id;
 
     /**
-     * @ORM\Column(type="decimal", precision=64, scale=8)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("\97[89][- ]?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9]$/")
      */
     private $isbn;
 
@@ -31,6 +33,7 @@ class Livre
 
     /**
      * @ORM\Column(type="integer")
+     * Assert\Positive
      */
     private $nombre_pages;
 
@@ -40,9 +43,25 @@ class Livre
     private $autheurs;
 
     /**
-     * @ORM\ManyToMany(targetEntity=genre::class, inversedBy="livres")
+     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="livres")
      */
     private $genres;
+
+    /**
+     * @ORM\Column(type="date")
+     * @Assert\Type("DateTime")
+     */
+    private $date_de_parution;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *             min = 0,
+     *             max = 20,
+     *             notInRangeMessage= "La valeur doit etre situer entre {{min}} et {{max}} "
+     * )
+     */
+    private $note;
 
     public function __construct()
     {
@@ -136,6 +155,33 @@ class Livre
         $this->genres->removeElement($genre);
 
         return $this;
+    }
+
+    public function getDateDeParution(): ?\DateTimeInterface
+    {
+        return $this->date_de_parution;
+    }
+
+    public function setDateDeParution(\DateTimeInterface $date_de_parution): self
+    {
+        $this->date_de_parution = $date_de_parution;
+
+        return $this;
+    }
+
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(int $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+    public function __toString(){
+        return $this->titre;
     }
 
    

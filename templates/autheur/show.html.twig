@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Autheur{% endblock %}
+
+{% block body %}
+    <h1>Autheur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ autheur.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom_prenom</th>
+                <td>{{ autheur.nomPrenom }}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ autheur.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Date_de_naissance</th>
+                <td>{{ autheur.dateDeNaissance ? autheur.dateDeNaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nationalite</th>
+                <td>{{ autheur.nationalite }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('autheur_index') }}">back to list</a>
+
+    <a href="{{ path('autheur_edit', {'id': autheur.id}) }}">edit</a>
+
+    {{ include('autheur/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Autheur{% endblock %}
+
+{% block body %}
+<div class="row bg-light w-50 p-5" style="margin-left:25%;">
+<div class="col-md-12">
+    <div class="fs-3 fw-bold mb-4 ">Créer un autheur :</div>
+
+    {{ include('autheur/_form.html.twig') }}
+
+    <a href="{{ path('autheur_index') }}">back to list</a>
+    </div></div>
+{% endblock %}
