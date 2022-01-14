@@ -27,7 +27,7 @@ class LivreRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('livre')
             ->andWhere('livre.titre LIKE :titre')
-            ->setParameter('titre', '%'.$titre.'%')
+            ->setParameter('titre', '%' . $titre . '%')
             ->getQuery()
             ->getResult()
         ;
@@ -37,10 +37,10 @@ class LivreRepository extends ServiceEntityRepository
       * @return Livre[] Returns an array of Livre objects
       */
     
-      public function getLivreBetweenTwoDates($dateMin,$dateMax)
+      public function findBetweenTwoDates($dateMin,$dateMax)
       {
           return $this->createQueryBuilder('livre')
-              ->andWhere('livre.titdate_parution  BETWEEN :dateMin AND :dateMax')
+              ->andWhere('livre.date_de_parution  BETWEEN :dateMin AND :dateMax')
               ->setParameter('dateMin', $dateMin)
               ->setParameter('dateMax', $dateMax)
               ->getQuery()
@@ -52,7 +52,7 @@ class LivreRepository extends ServiceEntityRepository
       * @return Livre[] Returns an array of Livre objects
       */
     
-      public function getLivresByNote($note)
+      public function findByNote($note)
       {
           return $this->createQueryBuilder('livre')
               ->andWhere('livre.note  = :note')
@@ -61,16 +61,30 @@ class LivreRepository extends ServiceEntityRepository
               ->getResult()
           ;
       }
+        /**
+      * @return Livre[] Returns an array of Livre objects
+      */
+    
+      public function findByDate($date)
+      {
+          return $this->createQueryBuilder('livre')
+              ->andWhere('livre.date_de_parution  = :date')
+              ->setParameter('date', $date)
+              ->getQuery()
+              ->getResult()
+          ;
+      }
+
 
        /**
       * @return Livre[] Returns an array of Livre objects
       */
     
-      public function getLivresByGenre($genre)
+      public function findByGenre($id)
       {
           return $this->createQueryBuilder('livre')
               ->innerJoin('livre.genres','g', 'WITH', 'g.id = :id')
-              ->setParameter('id', $genre)
+              ->setParameter('id', $id)
               ->getQuery()
               ->getResult()
           ;
@@ -80,11 +94,11 @@ class LivreRepository extends ServiceEntityRepository
       * @return Livre[] Returns an array of Livre objects
       */
     
-      public function getLivresByAutheur($genre)
+      public function findByAutheur($id)
       {
           return $this->createQueryBuilder('livre')
-              ->innerJoin('livre.autheur','a', 'WITH', 'a.id = :id')
-              ->setParameter('id', $autheur)
+              ->innerJoin('livre.autheurs','a', 'WITH', 'a.id = :id')
+              ->setParameter('id', $id)
               ->getQuery()
               ->getResult()
           ;
@@ -94,7 +108,7 @@ class LivreRepository extends ServiceEntityRepository
       * @return Livre[] Returns an array of Livre objects
       */
     
-      public function getDates($genre)
+      public function getDates()
       {
           return $this->createQueryBuilder('livre')
               ->select('livre.date_de_parution')

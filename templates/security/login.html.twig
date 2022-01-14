@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Log in!{% endblock %}
+ {% block stylesheets %}
+ <style>
+ *{
 
+ }
+ </style>
+{% endblock %}
 {% block body %}
 <form method="post">
     {% if error %}
@@ -40,3 +46,22 @@
     </button>
 </form>
 {% endblock %}
+<!--FOOTER-->
+                              <footer class="bg-secondary p-3">
+                                  <div class="container">
+                                      <div class="row ">
+                                          <div class="col justify-content-center">
+                                              <h1 class="text-center text-light fw-bold">Name company</h1>
+                                              <h3 class="text-center text-light fst-italic">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti.</h3>
+                                          </div>
+                                          <div class="py-2 text-center">
+                                          <a href="#"> <i class="fab fa-facebook fa-2x mx-2 text-primary"></i> </a>
+                                          <a href="#"> <i class="fab fa-twitter fa-2x mx-2 text-info"></i> </a>
+                                          <a href="#"> <i class="fab fa-youtube fa-2x mx-2 text-danger"></i> </a>
+                                          <a href="#"> <i class="fab fa-google-plus fa-2x mx-2 text-danger"></i> </a>
+                                        </div>
+                                      </div>
+                                  </div>
+            
+                              </footer>
+                             <!--END OF FOOTER-->

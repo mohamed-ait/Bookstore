@@ -30,7 +30,7 @@ class LivreType extends AbstractType
             'widget' => 'single_text',
             'attr' => ['class' => 'form-control my-3']
             ])
-        ->add('note',DateType::class,[
+        ->add('note',null::class,[
                 'widget' => 'single_text',
                 'attr' => ['class' => 'form-control my-3']
                 ])

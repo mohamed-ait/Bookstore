@@ -2,13 +2,153 @@
 
 {% block title %}Livre index{% endblock %}
 
+{% block stylesheets %}
+<style> 
+.banner{
+    background-image: url('');
+}
+</style>
+{% endblock %}
+{% block javascripts %}
+            <script src="js/main.js"> </script>
+        {% endblock %}
+
 {% block body %}
-    <h1>Livre index</h1>
+<!--BANNER-->
+
+<section class="p-sm-5 p-5 bg-light " >
+                        <div class="container-fluid">
+                            <div class="row mb-3">
+                                <div class="col text-center">
+                                    <h3 class="text-capitalize  fw-bold text-dark"></h3>
+                                    <p class="fst-italic fs-5 fw-bold text-light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore officia itaque nam rem! Molestiae, ducimus laborum!</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4 mb-sm-5">
+                                    <div class="card text-center">
+                                        <h3 class="fw-muted mt-3 mb-3">recherche par mot clé</h3>
+                                        <div class="card-body">
+                                         <form method="POST" class="text-secondary" onsubmit="chercher(event)">
+                                                <div class="form-goup mb-3">
+                                                
+                                                <input id="motCle" type="text" class="form-control"  placeholder="mot clé">
+                                                
+                                                </div>
+                                            <div class="form-goup">
+                                                <button type="submit" class="btn btn-warning mt-1 btn-block form-control" style="width:100%">chercher</button>
+                                            </div>
+                                            </form>
+                                    </div>
+                                    
+                                    </div>
+                                </div>
+                                 <div class="col-lg-4 mb-sm-5">
+                                    <div class="card text-center">
+                                        <h3 class="fw-muted mt-3 mb-3">recherche par dates</h3>
+                                        <div class="card-body">
+                                         <form method="POST" class="text-secondary" onsubmit="lister(event)">
+                                                <div class="form-goup mb-3">
+                                                
+                                                <input type="text" class="form-control" id="dateDeb" placeholder="date debut">
+                                                
+                                                </div>
+                                                <div class="form-goup mb-3">
+                                                
+                                                <input type="text" class="form-control" id="dateFin" placeholder="date fin">
+                                                
+                                                </div>
+                                            <div class="form-goup">
+                                                <button type="submit" class="btn btn-warning mt-1 btn-block form-control" style="width:100%">Lister</button>
+                                            </div>
+                                            </form>
+                                    </div>
+                                    
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-5 ">
+                                    <div class="card text-center">
+                                        <h3 class="fw-muted mt-3 mb-3">Filtrage </h3>
+                                        <div class="card-body">
+                                         <form action="#" class="text-secondary">
+            
+                                                <div class="form-group">
+                                                <select  id="" class="form-select mt-2" onchange="filtrerParNote(event)">
+                                                <option selected>Note</option>
+                                                {% for i  in 0..20  %}
+                                                <option value="{{ i }}">{{ i }}</option>
+                                                {% endfor %}
+                                                
+                                                </select>
+                                                <select  id="" class="form-select mt-2" onchange="filtrerParDate(event)">
+                                                <option selected>Date de parution</option>
+                                                {% for livre in livres %}
+                                                <option value="{{ livre.datedeparution|date("Y-m-d") }}">{{ livre.datedeparution|date("Y-m-d")  }}</option>
+                                                {% endfor %}
+                                                
+                                                </select>
+                                                
+                                                 </select>
+                                                <select  id="" class="form-select mt-2" onchange="filtrerParAutheur(event)">
+                                                <option selected>Autheur</option>
+                                                {% for autheur in autheurs %}
+                                                <option value="{{ autheur.id}}">{{ autheur.nomPrenom }}</option>
+                                                {% endfor %}
+                                                
+                                                </select>
+
+                                                </select>
+                                                <select  id="" class="form-select mt-2" onchange="filtrerParGenre(event)">
+                                                <option selected>Genre</option>
+                                                {% for genre in genres %}
+                                                <option value="{{ genre.id}}">{{ genre.nom }}</option>
+                                                {% endfor %}
+                                                
+                                                </select>
+                                                </div>
+                                            
+                                            </form>
+                                    </div>
+                              
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </section>
+
+                             <!--END OF BANNER-->
+                             <!-- section : display books -->
+                             <section>
+                             <div class=" container-fluid p-5 bg-light">
+                            <div class="row">
+                          {% for livre in livres %}
+
+                             <div class="col-md-3">
+                             <div class="card text-center mx-2 mb-3 bg-white">
+                                        <i class="bi bi-book-half " style="font-size: 4rem"></i>
+                                        <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="fw-bold">{{livre.titre}}</h3>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="text-right mb-3">
+                                         <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn btn-warning"><i class="bi bi-display"></i></a>
+                                         <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn btn-success"><i class="bi bi-pen"></i></a>
+                                    </div>
+                                    </div>
+                             </div>
+                                    
+                                
+                                 {% endfor %}
+                                 </div>
+                                 </div>
+                             <!--
+                              <h1>Livre index</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Isbn</th>
                 <th>Titre</th>
                 <th>Nombre_pages</th>
@@ -18,7 +158,6 @@
         <tbody>
         {% for livre in livres %}
             <tr>
-                <td>{{ livre.id }}</td>
                 <td>{{ livre.isbn }}</td>
                 <td>{{ livre.titre }}</td>
                 <td>{{ livre.nombrePages }}</td>
@@ -33,7 +172,12 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table>-->
+                             
+                         
+                          
+                             </section>
+   
 
-    <a href="{{ path('livre_new') }}">Create new</a>
+ <a href="{{ path('livre_new') }}">Create new</a>   
 {% endblock %}
