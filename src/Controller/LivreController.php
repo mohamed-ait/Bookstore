@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/")
@@ -21,14 +22,19 @@ class LivreController extends AbstractController
     /**
      * @Route("/", name="livre_index", methods={"GET"})
      */
-    public function index(LivreRepository $livreRepository,AutheurRepository $ar,GenreRepository $gr): Response
+    public function index(Request $request,LivreRepository $livreRepository,AutheurRepository $ar,GenreRepository $gr,PaginatorInterface $paginator): Response
     {
-        $class="book";
+        $livres=$livreRepository->findAll();
+        $livres = $paginator->paginate(
+            $livres, 
+            $request->query->getInt('page', 1),
+            /*limit per page*/
+        );
         return $this->render('livre/index.html.twig', [
-            'livres' => $livreRepository->findAll(),
+            'livres' => $livres,
             'autheurs' => $ar->findAll(),
             'genres' => $gr->findAll(),
-            'class' => $class
+
         ]);
     }
 

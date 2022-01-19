@@ -4,8 +4,16 @@
 
 {% block stylesheets %}
 <style> 
-.banner{
-    background-image: url('');
+#bd{
+    background-color:#373737;
+}
+#sec1{
+background-image: url("https://foodtank.com/wp-content/uploads/2021/07/alfons-morales-YLSwjSy7stw-unsplash.jpg");
+background-repeat : no-repeat;
+}
+#h:focus{
+    background-color : #373737;
+    color:#ffffff;
 }
 </style>
 {% endblock %}
@@ -16,12 +24,12 @@
 {% block body %}
 <!--BANNER-->
 
-<section class="p-sm-5 p-5 bg-light " >
+<section class="p-sm-5 p-5 bg-light " id="sec1">
                         <div class="container-fluid">
                             <div class="row mb-3">
                                 <div class="col text-center">
                                     <h3 class="text-capitalize  fw-bold text-dark"></h3>
-                                    <p class="fst-italic fs-5 fw-bold text-light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore officia itaque nam rem! Molestiae, ducimus laborum!</p>
+                                    <p class="fst-italic fs-5 fw-bold text-light"></p>
                                 </div>
                             </div>
                             <div class="row">
@@ -43,7 +51,7 @@
                                     
                                     </div>
                                 </div>
-                                 <div class="col-lg-4 mb-sm-5">
+                                 <div class="col-lg-4 mb-sm-5" >
                                     <div class="card text-center">
                                         <h3 class="fw-muted mt-3 mb-3">recherche par dates</h3>
                                         <div class="card-body">
@@ -119,8 +127,10 @@
                              <!--END OF BANNER-->
                              <!-- section : display books -->
                              <section>
-                             <div class=" container-fluid p-5 bg-light">
-                            <div class="row">
+                             <div class=" container-fluid p-5 bg-light" id="bd"> 
+                                  <div class="row">
+    <div id="h"class="text-center mb-4 mt-4   p-3 "><h1 class="f-bold">Les livres </h1></div>
+
                           {% for livre in livres %}
 
                              <div class="col-md-3">
@@ -141,6 +151,7 @@
                                     
                                 
                                  {% endfor %}
+                                 <div class="pagination">{{ knp_pagination_render(livres) }}</div> 
                                  </div>
                                  </div>
                              <!--

@@ -1,17 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
-
+{% block stylesheets %}
+<style> 
+.bd{
+background-image: url("https://sbooks.net/wp-content/uploads/2021/10/old-book-flying-letters-magic-light-background-bookshelf-library-ancient-books-as-symbol-knowledge-history-218640948.jpg");
+background-repeat : no-repeat;
+}
+</style>
+{% endblock %}
 {% block body %}
-    <h1>Register</h1>
-
+<div class="bd container-fluid p-5 bg-secondary">
+      
+<div class="form bg-white p-5 w-50 mt-4 border border-5 border-secondary" style="margin-left:30%">
+<div class="header text-center "><h3>S'enregistrer</h3></div> 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
+        <div class="form-group">
+        <button type="submit" class="btn btn-primary form-control">envoyer</button></div>
     {{ form_end(registrationForm) }}
+    </div></div>
 {% endblock %}

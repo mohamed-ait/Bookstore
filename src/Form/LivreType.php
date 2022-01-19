@@ -26,20 +26,21 @@ class LivreType extends AbstractType
             'label' => 'Nombre de pages',
             'attr'  => ['class' => 'form-control my-3']
         ])
+        ->add('autheurs',null,[
+            'attr'  => ['class' => 'form-control my-3']
+        ])
+        ->add('genres',null,[
+            'attr'  => ['class' => 'form-control my-3']
+        ])
         ->add('date_de_parution',DateType::class,[
             'widget' => 'single_text',
             'attr' => ['class' => 'form-control my-3']
             ])
-        ->add('note',null::class,[
-                'widget' => 'single_text',
+        ->add('note',null,[
                 'attr' => ['class' => 'form-control my-3']
                 ])
-        ->add('autheurs',null,[
-                    'attr'  => ['class' => 'form-control my-3']
-                ])
-        ->add('genres',null,[
-                    'attr'  => ['class' => 'form-control my-3']
-                ])
+        
+       
         ;
     }
 

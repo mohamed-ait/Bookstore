@@ -3,13 +3,15 @@
 {% block title %}Log in!{% endblock %}
  {% block stylesheets %}
  <style>
- *{
-
- }
+#bd{
+background-color: #373737;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='100' y1='33' x2='100' y2='-3'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='100' y1='135' x2='100' y2='97'%3E%3Cstop offset='0' stop-color='%23000' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23000' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='%232f2f2f' fill-opacity='0.6'%3E%3Crect x='100' width='100' height='100'/%3E%3Crect y='100' width='100' height='100'/%3E%3C/g%3E%3Cg fill-opacity='0.5'%3E%3Cpolygon fill='url(%23a)' points='100 30 0 0 200 0'/%3E%3Cpolygon fill='url(%23b)' points='100 100 0 130 0 100 200 100 200 130'/%3E%3C/g%3E%3C/svg%3E");
+}
  </style>
 {% endblock %}
 {% block body %}
-<form method="post">
+<div class="container-fluid p-5 bg-light " id="bd">
+<form method="post" class="bg-white p-4 border border-5 border-secodary w-50" style="margin-left:25%">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -20,12 +22,17 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
+    <div class="header text-center"><h1 class="h3 mb-3 font-weight-normal">Se connecter</h1></div> 
+    
+    <label for="inputEmail" class="mb-2">Email</label>
+<div class="form-group mb-3">
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
+    </div>
+    
+    <label for="inputPassword" class="mb-2">Password</label>
+    <div class="form-group mb-3">
+    <input type="password" class="form-control" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    </div>
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
@@ -40,28 +47,11 @@
             </label>
         </div>
     #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+   <div class="form-group mb-3">
+    <button class="btn btn-lg btn-secondary form-control w-100" type="submit">
+        envoyer
     </button>
+    </div>
 </form>
+</div>
 {% endblock %}
-<!--FOOTER-->
-                              <footer class="bg-secondary p-3">
-                                  <div class="container">
-                                      <div class="row ">
-                                          <div class="col justify-content-center">
-                                              <h1 class="text-center text-light fw-bold">Name company</h1>
-                                              <h3 class="text-center text-light fst-italic">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti.</h3>
-                                          </div>
-                                          <div class="py-2 text-center">
-                                          <a href="#"> <i class="fab fa-facebook fa-2x mx-2 text-primary"></i> </a>
-                                          <a href="#"> <i class="fab fa-twitter fa-2x mx-2 text-info"></i> </a>
-                                          <a href="#"> <i class="fab fa-youtube fa-2x mx-2 text-danger"></i> </a>
-                                          <a href="#"> <i class="fab fa-google-plus fa-2x mx-2 text-danger"></i> </a>
-                                        </div>
-                                      </div>
-                                  </div>
-            
-                              </footer>
-                             <!--END OF FOOTER-->
