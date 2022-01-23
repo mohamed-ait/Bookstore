@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+{% block stylesheets %}
+<style> 
+#bd{
+    background-image: url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_883231284_200013331818843182490_335833.jpg");
+}
+#r:hover{
+    background-color:black;
+
+}
+</style>
+{% endblock %}
+{% block body %}
+    <!-- section : display users -->
+                             <section>
+                             <div class=" container-fluid p-5 bg-light" id="bd"> 
+                                  <div class="row">
+    <div id="h"class="text-center   p-3 "><h1 class="f-bold">Utilisateurs : </h1></div>
+
+                          {% for user in users %}
+
+                             <div class="col-md-4 p-3">
+                             <div class="card text-center mx-2 mb-3 bg-white">
+                                        <i class="bi bi-person-square " style="font-size: 4rem"></i>
+                                        <div class="card-body">
+                                        <div class="card-title">
+                                            <h4 class="fw-bold">Email :{{user.email}}</h4>
+                                            <h4 class="fw-bold">Role :{{ user.roles ? "admin" : 'user' }}</h4>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="text-right mb-3">
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                         <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-success"><i class="bi bi-pen"></i></a>
+                                         <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-danger"><i class="bi bi-file-x"></i></a>{% endif %}
+                 
+                                    </div>
+                                    </div>
+                             </div>
+                                    
+                                
+                                 {% endfor %}
+                                 <div class="d-flex justify-content-center">{{ knp_pagination_render(users,'pagination.html.twig') }}</div> 
+                                 </div>
+                                 </div>
+<!--<h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_new') }}">Create new</a>-->
+{% endblock %}
