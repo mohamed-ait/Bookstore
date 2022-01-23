@@ -5,7 +5,7 @@
 {% block stylesheets %}
 <style> 
 #bd{
-    background-color:#373737;
+    background-image: url("https://supportpay.com/wp-content/uploads/getty_883231284_200013331818843182490_335833.jpg");
 }
 #sec1{
 background-image: url("https://foodtank.com/wp-content/uploads/2021/07/alfons-morales-YLSwjSy7stw-unsplash.jpg");
@@ -143,8 +143,9 @@ background-repeat : no-repeat;
                                         
                                     </div>
                                     <div class="text-right mb-3">
-                                         <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn btn-warning"><i class="bi bi-display"></i></a>
-                                         <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn btn-success"><i class="bi bi-pen"></i></a>
+                                         <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn btn-warning">details<i class="bi bi-display"></i></a>
+                                         {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn btn-success"><i class="bi bi-pen"></i></a>
+                                         <a href="{{ path('livre_delete', {'id': livre.id}) }}" class="btn btn-danger"><i class="bi bi-file-x"></i></a>{% endif  %}
                                     </div>
                                     </div>
                              </div>

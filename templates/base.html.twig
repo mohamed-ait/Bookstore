@@ -28,24 +28,19 @@
     <div class="collapse navbar-collapse justify-content-between" id="nav">
 <ul class="navbar nav me-auto mb-2 mb-lg-0">
     <li class="nav-item col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold"  href="{{ path('livre_index') }}">Accueil</a></li>
-    <li class="nav-item col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold"  href="#"> Autheurs</a></li>
-    <li class="nav-item dropdown col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 dropdown-toggle fw-bold" data-bs-toggle="dropdown" href="#">Genre</a>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item fw-bold" href="#">project1</a></li>
-            <li><a class="dropdown-item fw-bold" href="#">project2</a></li>
-            <li><a class="dropdown-item fw-bold" href="#">project3</a></li>
-            <li><a class="dropdown-item fw-bold" href="#">project4</a></li>
-          </ul>
-    </li>
-    <li class="nav-item col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold" href="#">Teams</a></li>
+    <li class="nav-item col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold"  href="{{ path('autheur_index') }}"> Autheurs</a></li>
+<li class="nav-item col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold"  href="{{ path('genre_index') }}"> Genres</a></li>    <li class="nav-item col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold" href="#">Teams</a></li>
     <li class="nav-item col-12 col-lg-auto">  <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold" href="#">Contact</a> </li>    
 </ul> 
 <form class="form-inline " action="#">
     <div class="input-group">
-       <input type="text" class="form-control" placeholder="search">
-       <div class="input-group-append">
-           <button class="btn bg-light btn btn-outline-success"> <i class="fas fa-search text-muted"></i> </button>
-       </div>
+       <ul class="d-flex list-unstyled"> {% if is_granted('IS_AUTHENTICATED_FULLY') %} <li class="nav-item col-12 col-lg-auto"><a class="nav-link text-light  fw-bold" href="{{path('app_logout')}}">se deconnecter</a></li>
+       {% else %}
+       <li class="nav-item col-3 col-lg-auto"> <a href="{{path('app_login')}}" class="nav-link text-light  fw-bold">se connecter</a>
+       <li class="nav-item col-3 col-lg-auto"> <a href="{{path('app_register')}}" class="nav-link text-light  fw-bold">s'enregistrer</a>
+
+       {% endif %}
+       </ul>
     </div>
 </form></div>
 </nav>

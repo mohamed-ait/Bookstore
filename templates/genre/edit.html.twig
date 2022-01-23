@@ -1,13 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Genre{% endblock %}
+{% block title %}Modifier un  Genre{% endblock %}
+{% block stylesheets %}
+<style> 
+#bd{
+    background-image: url("https://about.proquest.com/globalassets/proquest/media/images/decrotive/oldbooks.jpg");
+}
 
+</style>
+{% endblock %}
 {% block body %}
-    <h1>Edit Genre</h1>
+ <div class=" bg-light p-4" id="bd">
+<div class="row bg-white w-50 p-5 border border-5 border-secondary border-rounded" style="margin-left:25%;">
+<div class="col-md-12">
+    <div class="fs-3 mb-4 fw-bold text-center">Modifier un genre :</div>
 
     {{ include('genre/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('genre_index') }}">back to list</a>
 
     {{ include('genre/_delete_form.html.twig') }}
+     </div></div>
+    </div>
 {% endblock %}

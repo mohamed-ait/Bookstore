@@ -28,7 +28,7 @@ class LivreController extends AbstractController
         $livres = $paginator->paginate(
             $livres, 
             $request->query->getInt('page', 1),
-            /*limit per page*/
+            8/*limit per page*/
         );
         return $this->render('livre/index.html.twig', [
             'livres' => $livres,
@@ -105,8 +105,13 @@ class LivreController extends AbstractController
     /**
      * @Route("livre/chercher/{motCle}", name="livre_chercher", methods={"GET"})
      */
-    public function chercher(String $motCle,LivreRepository $lr,GenreRepository $gr,AutheurRepository $ar):Response{
+    public function chercher(Request $request,String $motCle,LivreRepository $lr,PaginatorInterface $paginator,GenreRepository $gr,AutheurRepository $ar):Response{
       $livres=$lr->findByTitre($motCle);
+      $livres = $paginator->paginate(
+        $livres, 
+        $request->query->getInt('page', 1),
+        8/*limit per page*/
+    );
         return $this->render('livre/chercher.html.twig',['livres'=>$livres,
         //'genres'=>$gr->getAll(),'autheurs'=>$ar->getAll()
     ]);
@@ -114,8 +119,13 @@ class LivreController extends AbstractController
     /**
      * @Route("livre/chercher/entre_dates/{dateMin}/{dateMax}", name="livre_entreDates", methods={"GET"})
      */
-    public function findByDates( $dateMin, $dateMax,LivreRepository $lr,GenreRepository $gr,AutheurRepository $ar):Response{
+    public function findByDates( Request $request,$dateMin, $dateMax,LivreRepository $lr,GenreRepository $gr,PaginatorInterface $paginator,AutheurRepository $ar):Response{
         $livres=$lr->findBetweenTwoDates(strval($dateMin),strval($dateMax));
+        $livres = $paginator->paginate(
+            $livres, 
+            $request->query->getInt('page', 1),
+            8/*limit per page*/
+        );
           return $this->render('livre/chercher.html.twig',['livres'=>$livres,
           //'genres'=>$genreRepository->getAll(),'autheurs'=>$autheurRepository->getAll()
         ]);
@@ -124,14 +134,19 @@ class LivreController extends AbstractController
       /**
      * @Route("livre/chercher/livresParNote/{note}", name="livre_parNote", methods={"GET"})
      */
-    public function findByNote( $note, LivreRepository $livreRepository):Response{
+    public function findByNote(Request $request, $note, LivreRepository $livreRepository,PaginatorInterface $paginator):Response{
         $livres=$livreRepository->findByNote($note);
+        $livres = $paginator->paginate(
+            $livres, 
+            $request->query->getInt('page', 1),
+            8/*limit per page*/
+        );
           return $this->render('livre/chercher.html.twig',['livres'=>$livres]);
       }
         /**
      * @Route("livre/chercher/livresParGenre/{id}", name="livre_parGenre", methods={"GET"})
      */
-    public function findByGenre( $id, LivreRepository $livreRepository):Response{
+    public function findByGenre(Request $request, $id, LivreRepository $livreRepository,PaginatorInterface $paginator):Response{
         $livres=$livreRepository->findByGenre($id);
           return $this->render('livre/chercher.html.twig',['livres'=>$livres]);
       }
@@ -139,23 +154,38 @@ class LivreController extends AbstractController
        /**
      * @Route("livre/chercher/livresParAutheur/{id}", name="livre_parAutheur", methods={"GET"})
      */
-    public function findByAutheur( $id, LivreRepository $livreRepository):Response{
+    public function findByAutheur(Request $request, $id, LivreRepository $livreRepository,PaginatorInterface $paginator):Response{
         $livres=$livreRepository->findByAutheur($id);
+        $livres = $paginator->paginate(
+            $livres, 
+            $request->query->getInt('page', 1),
+            8/*limit per page*/
+        );
           return $this->render('livre/chercher.html.twig',['livres'=>$livres]);
       }
       /**
      * @Route("livre/chercher/livresParDate/{date}", name="livreParDate", methods={"GET"})
      */
-    public function findByDate( $date, LivreRepository $livreRepository):Response{
+    public function findByDate(Request $request, $date, LivreRepository $livreRepository,PaginatorInterface $paginator):Response{
         $livres=$livreRepository->findByDate($date);
+        $livres = $paginator->paginate(
+            $livres, 
+            $request->query->getInt('page', 1),
+            8/*limit per page*/
+        );
           return $this->render('livre/chercher.html.twig',['livres'=>$livres]);
       }
 
        /**
      * @Route("livre/chercher/dates", name="livre_dates", methods={"GET"})
      */
-    public function findDates(LivreRepository $livreRepository):Response{
+    public function findDates(Request $request,LivreRepository $livreRepository,PaginatorInterface $paginator):Response{
         $livres=$livreRepository->findDates();
+        $livres = $paginator->paginate(
+            $livres, 
+            $request->query->getInt('page', 1),
+            8/*limit per page*/
+        );
           return $this->render('livre/chercher.html.twig',['livres'=>$livres]);
       }
 }

@@ -1,8 +1,55 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Autheur index{% endblock %}
+{% block stylesheets %}
+<style> 
+#bd{
+    background-image: url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_883231284_200013331818843182490_335833.jpg");
+}
+#r:hover{
+    background-color:black;
+
+}
+</style>
+{% endblock %}
 
 {% block body %}
+    <!-- section : display books -->
+                             <section>
+                             <div class=" container-fluid p-5 bg-light" id="bd"> 
+                                  <div class="row">
+    <div id="h"class="text-center   p-3 "><h1 class="f-bold">Autheurs : </h1></div>
+
+                          {% for autheur in autheurs %}
+
+                             <div class="col-md-4 p-3">
+                             <div class="card text-center mx-2 mb-3 bg-white">
+                                        <i class="bi bi-person-square " style="font-size: 4rem"></i>
+                                        <div class="card-body">
+                                        <div class="card-title">
+                                            <h4 class="fw-bold">Nom :{{autheur.nomPrenom}}</h4>
+                                            <h4 class="fw-bold">Sexe  : {% if autheur.sexe == 'F' %} Femenin {% endif %}
+                                            {% if autheur.sexe == 'M' %} Masculin {% endif %}
+                                            </h4>
+                                            <h4 class="fw-bold">Date de naissance  :{{autheur.dateDeNaissance|date('Y-m-d')}}</h4>
+                                            <h4 class="fw-bold">Nationalité :{{autheur.nationalite}}</h4>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="text-right mb-3">
+                                         <a href="{{ path('autheur_edit', {'id': autheur.id}) }}" class="btn btn-success"><i class="bi bi-pen"></i></a>
+                                         <a href="{{ path('autheur_delete', {'id': autheur.id}) }}" class="btn btn-danger"><i class="bi bi-file-x"></i></a>
+                 
+                                    </div>
+                                    </div>
+                             </div>
+                                    
+                                
+                                 {% endfor %}
+                                 <div class="d-flex justify-content-center">{{ knp_pagination_render(autheurs,'pagination.html.twig') }}</div> 
+                                 </div>
+                                 </div>
+                                 <!--
     <h1>Autheur index</h1>
 
     <table class="table">
@@ -37,5 +84,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('autheur_new') }}">Create new</a>
+    <a href="{{ path('autheur_new') }}">Create new</a>-->
+    </section>
 {% endblock %}

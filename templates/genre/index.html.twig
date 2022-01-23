@@ -1,35 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Genre index{% endblock %}
+{% block stylesheets %}
+<style> 
+#bd{
+    background-image: url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_883231284_200013331818843182490_335833.jpg");
+}
+#r:hover{
+    background-color:black;
 
+}
+</style>
+{% endblock %}
 {% block body %}
-    <h1>Genre index</h1>
+    <!-- section : display books -->
+                             <section>
+                             <div class=" container-fluid p-5 bg-light" id="bd"> 
+                                  <div class="row">
+    <div id="h"class="text-center   p-3 "><h1 class="f-bold">Les Genres :</h1></div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for genre in genres %}
-            <tr>
-                <td>{{ genre.id }}</td>
-                <td>{{ genre.nom }}</td>
-                <td>
-                    <a href="{{ path('genre_show', {'id': genre.id}) }}">show</a>
-                    <a href="{{ path('genre_edit', {'id': genre.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                          {% for genre in genres %}
+
+                             <div class="col-md-3">
+                             <div class="card text-center mx-2 mb-3 bg-white">
+                                        <i class="bi bi-journal " style="font-size: 4rem"></i>
+                                        <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="fw-bold">{{genre.nom}}</h3>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="text-right mb-3">
+                                         <a href="{{ path('genre_show', {'id': genre.id}) }}" class="btn btn-warning"><i class="bi bi-display"></i></a>
+                                         <a href="{{ path('genre_edit', {'id': genre.id}) }}" class="btn btn-success"><i class="bi bi-pen"></i></a>
+                                          <a href="{{ path('genre_delete', {'id': genre.id}) }}" class="btn btn-danger"><i class="bi bi-file-x"></i></a>
+                                    </div>
+                                    </div>
+                             </div>
+                                    
+                                
+                                 {% endfor %}
+                                 <div class="d-flex justify-content-center">{{ knp_pagination_render(genres,'pagination.html.twig') }}</div> 
+                                 </div>
+                                 </div></section>
 
     <a href="{{ path('genre_new') }}">Create new</a>
 {% endblock %}

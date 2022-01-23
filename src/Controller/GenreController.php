@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/genre")
@@ -19,10 +20,16 @@ class GenreController extends AbstractController
     /**
      * @Route("/", name="genre_index", methods={"GET"})
      */
-    public function index(GenreRepository $genreRepository): Response
+    public function index(Request $request,PaginatorInterface $paginator,GenreRepository $genreRepository): Response
     {
+        $genres=$genreRepository->findAll();
+        $genres = $paginator->paginate(
+            $genres, 
+            $request->query->getInt('page', 1),
+            8/*limit per page*/
+        );
         return $this->render('genre/index.html.twig', [
-            'genres' => $genreRepository->findAll(),
+            'genres' => $genres,
         ]);
     }
 

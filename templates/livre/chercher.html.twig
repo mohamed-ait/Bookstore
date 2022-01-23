@@ -3,16 +3,37 @@
 {% block title %}Livre index{% endblock %}
 {% block stylesheets %}
 <style> 
-.banner{
-    background-image: url('');
+#bd{
+    background-image: url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_883231284_200013331818843182490_335833.jpg");
 }
 </style>
 {% endblock %}
 
 {% block body %}
+        <!-- section : display books -->
+                             <section>
+                             <div class=" container-fluid p-5 bg-light" id="bd"> 
+                                  <div class="row">
+    <div id="h"class="text-center mb-2 mt-2   p-3 "><h3 class="f-bold">Resultat de votre recherche:</h3></div>
 
-    <h1>Livre index</h1>
+                          {% for livre in livres %}
 
+                             <div class="col-md-4">
+                             <div class="card text-center mx-2 mb-3 bg-white">
+                                        <i class="bi bi-book-half " style="font-size: 5rem"></i>
+                                        <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="fw-bold">{{livre.titre}}</h3>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="text-right mb-3">
+                                         <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn btn-warning">Details<i class="bi bi-display"></i></a>
+                                         <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn btn-success"><i class="bi bi-pen"></i></a>
+                                    </div>
+                                    </div>
+                             </div>
+                                     <!--
     <table class="table">
         <thead>
             <tr>
@@ -40,6 +61,33 @@
         {% endfor %}
         </tbody>
     </table>
-
+////////////////////////
+    <div class="col-md-3">
+ <h4 class="fw-bold mb-2">{{livre.titre}}</h4>
+ <i class="bi bi-book-half " style="font-size: 7rem"></i>
+ 
+ </div>
+ <div class="col-md-3"><div class=" mb-5 fs-4">ISBN :{{livre.isbn}}</div><div class="fs-4 ">Date de parution: <br>{{ livre.datedeparution|date("Y-m-d")  }}</div></div>
+ <div class="col-md-3"><div class=" mb-5 fs-4">Nombre de pages :{{livre.nombrePages}}</div><div class=" fs-4">Note :{{livre.Note}}</div></div>
+ <div class="col-md-3">Autheurs : <select class="form-select mt-2 mb-4">
+ {% for autheur in livre.autheurs %}
+ <option value="{{autheur.nomPrenom}}">{{autheur.nomPrenom}}</option>{% endfor %}
+ </select>
+ <div class="col-md-3">Genres : <select class="form-select ">
+ {% for genre in livre.genres %}
+ <option value="{{genre.nom}}">{{genre.nom}}</option>{% endfor %}
+ </select></div>
+  </div>
+-->
+                                
+                                 {% endfor %}
+                                 <div class="d-flex justify-content-center">{{ knp_pagination_render(livres,'pagination.html.twig') }}</div> 
+                                 </div>
+                                 </div>         
+                         
+                          
+                             </section>
     <a href="{{ path('livre_new') }}">Create new</a>
+   
 {% endblock %}
+

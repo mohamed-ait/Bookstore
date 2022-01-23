@@ -1,34 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Livre{% endblock %}
+{% block stylesheets %}
+<style> 
+#bd{
+    background-image: url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_883231284_200013331818843182490_335833.jpg");
+}
+#r:hover{
+    background-color:black;
 
+}
+</style>
+{% endblock %}
 {% block body %}
-    <h1>Livre</h1>
+    <div class="container-fluid p-5 bg-light" id="bd">
+    <div class="row bg-light p-4 ml-5 mr-5 border border-5 border-secondary w-75 rounded-3"style="margin-left:10%" id="r">
+    <div class="col-md-3">
+    <h4 class="mb-3">{{ livre.titre }}</h4>
+    <i class="bi bi-book-half " style="font-size: 7rem"></i>
+    </div>
+     <div class="col-md-3">
+    <h5 class="mb-5 mt-4"> ISBN : {{ livre.isbn }}</h5>
+    <h5>Nombre des pages : {{ livre.nombrePages }} </h5>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ livre.id }}</td>
-            </tr>
-            <tr>
-                <th>Isbn</th>
-                <td>{{ livre.isbn }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ livre.titre }}</td>
-            </tr>
-            <tr>
-                <th>Nombre_pages</th>
-                <td>{{ livre.nombrePages }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+    <div class="col-md-3">
+    <h5 class="mb-5 mt-4">Date de parution : {{livre.datedeparution|date("Y-m-d") }}</h5>
+    <h5> Note : {{livre.Note}} </h5>
+    </div>
+    <div class="col-md-3 mt-3">
+    <h5>Genres :</h5>
+    <select class="form-select mb-5" name="" id="">{% for genre in livre.genres%}
+    <option value="{{genre.nom}}">{{genre.nom}}</option>{% endfor %}</select>
+    <h5>Autheurs :</h5>
+    <select class="form-select" name="" id="">{% for autheur in livre.autheurs%}
+    <option value="{{autheur.nomPrenom}}">{{autheur.nomPrenom}}</option>{% endfor %}</select>
+    </div>
+    
+    </div>
     <a href="{{ path('livre_index') }}">back to list</a>
 
     <a href="{{ path('livre_edit', {'id': livre.id}) }}">edit</a>
 
-    {{ include('livre/_delete_form.html.twig') }}
+    {{ include('livre/_delete_form.html.twig') }}</div>
+
+    
 {% endblock %}
