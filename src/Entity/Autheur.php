@@ -26,10 +26,7 @@ class Autheur
      */
     private $nom_prenom;
 
-    /**
-     * @ORM\Column(type="string", length=1)
-     * @Assert\Choice({"M"},{"F"})
-     */
+    
     private $sexe;
 
     /**

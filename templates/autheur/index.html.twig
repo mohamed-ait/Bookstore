@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block body %}
-    <!-- section : display books -->
+    <!-- section : display autheurs -->
                              <section>
                              <div class=" container-fluid p-5 bg-light" id="bd"> 
                                   <div class="row">
@@ -37,8 +37,9 @@
                                         
                                     </div>
                                     <div class="text-right mb-3">
+                                    {% if is_granted('ROLE_ADMIN') %}
                                          <a href="{{ path('autheur_edit', {'id': autheur.id}) }}" class="btn btn-success"><i class="bi bi-pen"></i></a>
-                                         <a href="{{ path('autheur_delete', {'id': autheur.id}) }}" class="btn btn-danger"><i class="bi bi-file-x"></i></a>
+                                        <a href="{{ path('autheur_delete', {'id': autheur.id}) }}" class="btn btn-danger"><i class="bi bi-file-x"></i></a>{% endif %}
                  
                                     </div>
                                     </div>
@@ -49,41 +50,5 @@
                                  <div class="d-flex justify-content-center">{{ knp_pagination_render(autheurs,'pagination.html.twig') }}</div> 
                                  </div>
                                  </div>
-                                 <!--
-    <h1>Autheur index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom_prenom</th>
-                <th>Sexe</th>
-                <th>Date_de_naissance</th>
-                <th>Nationalite</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for autheur in autheurs %}
-            <tr>
-                <td>{{ autheur.id }}</td>
-                <td>{{ autheur.nomPrenom }}</td>
-                <td>{{ autheur.sexe }}</td>
-                <td>{{ autheur.dateDeNaissance ? autheur.dateDeNaissance|date('Y-m-d') : '' }}</td>
-                <td>{{ autheur.nationalite }}</td>
-                <td>
-                    <a href="{{ path('autheur_show', {'id': autheur.id}) }}">show</a>
-                    <a href="{{ path('autheur_edit', {'id': autheur.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('autheur_new') }}">Create new</a>-->
     </section>
 {% endblock %}

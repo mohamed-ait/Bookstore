@@ -1,3 +1,4 @@
+ 
 {% extends 'base.html.twig' %}
 
 {% block title %}Livre index{% endblock %}
@@ -145,7 +146,7 @@ background-repeat : no-repeat;
                                     <div class="text-right mb-3">
                                          <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn btn-warning">details<i class="bi bi-display"></i></a>
                                          {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn btn-success"><i class="bi bi-pen"></i></a>
-                                         <a href="{{ path('livre_delete', {'id': livre.id}) }}" class="btn btn-danger"><i class="bi bi-file-x"></i></a>{% endif  %}
+                                         {{ include('livre/_delete_form.html.twig') }}{% endif  %}
                                     </div>
                                     </div>
                              </div>
@@ -155,41 +156,10 @@ background-repeat : no-repeat;
                                  <div class="d-flex justify-content-center">{{ knp_pagination_render(livres,'pagination.html.twig') }}</div> 
                                  </div>
                                  </div>
-                             <!--
-                              <h1>Livre index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Isbn</th>
-                <th>Titre</th>
-                <th>Nombre_pages</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for livre in livres %}
-            <tr>
-                <td>{{ livre.isbn }}</td>
-                <td>{{ livre.titre }}</td>
-                <td>{{ livre.nombrePages }}</td>
-                <td>
-                    <a href="{{ path('livre_show', {'id': livre.id}) }}">show</a>
-                    <a href="{{ path('livre_edit', {'id': livre.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>-->
-                             
-                         
+            
                           
                              </section>
    
 
- <a href="{{ path('livre_new') }}">Create new</a>   
+ 
 {% endblock %}

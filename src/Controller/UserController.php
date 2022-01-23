@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Repository\LivreRepository;
+use App\Repository\AutheurRepository;
+use App\Repository\GenreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -97,5 +100,15 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+    }
+     /**
+     * @Route("/user_panneau", name="user_dashboard", methods={"GET"})
+     */
+    public function dash( UserRepository $ur,GenreRepository $gr,AutheurRepository $ar,LivreRepository $lr ): Response
+    {
+        $users=$ur->findAll();
+        return $this->render('user/dashboard.html.twig', [
+            'users' => $users,
+        ]);
     }
 }

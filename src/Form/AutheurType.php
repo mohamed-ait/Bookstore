@@ -20,7 +20,7 @@ class AutheurType extends AbstractType
             ])
             ->add('sexe',ChoiceType::class,[
                 'choices' => [
-                    'Féminin' => 'F',
+                    'Feminin' => 'F',
                     'Masculin' => 'M'
                 ],
                 'attr' => ['class' => 'form-control my-3']

@@ -29,8 +29,8 @@
 <ul class="navbar nav me-auto mb-2 mb-lg-0">
     <li class="nav-item col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold"  href="{{ path('livre_index') }}">Accueil</a></li>
     <li class="nav-item col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold"  href="{{ path('autheur_index') }}"> Autheurs</a></li>
-<li class="nav-item col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold"  href="{{ path('genre_index') }}"> Genres</a></li>    <li class="nav-item col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold" href="#">Teams</a></li>
-    <li class="nav-item col-12 col-lg-auto">  <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold" href="#">Contact</a> </li>    
+<li class="nav-item col-12 col-lg-auto"> <a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold"  href="{{ path('genre_index') }}"> Genres</a></li>
+    <li class="nav-item col-12 col-lg-auto">  {% if is_granted('ROLE_ADMIN') %}<a class="nav-link text-light fs-5 text-uppercase px-3 fw-bold" href="{{path('dashboard_index')}}" >Dashboard</a> {% endif %}</li>    
 </ul> 
 <form class="form-inline " action="#">
     <div class="input-group">

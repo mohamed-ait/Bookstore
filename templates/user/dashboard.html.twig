@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+{% block stylesheets %}
+<style> 
+#bd{
+    background-image: url("https://www.incimages.com/uploaded_files/image/1920x1080/getty_883231284_200013331818843182490_335833.jpg");
+}
+#r:hover{
+    background-color:black;
+
+}
+</style>
+{% endblock %}
+{% block body %}
+    <!-- section : display users -->
+                             <section>
+                             <div class=" container-fluid p-5 bg-light" id="bd"> 
+                             <div id="h"class="text-center   p-3 "><h1 class="f-bold">Dashboard : </h1></div>
+                                  <div class="row mb-5 p-3">
+                           <div class="col-md-1"></div>
+                             <div class="col-md-4 p-3 bg-white text-center">
+                             <i class="bi bi-person-square " style="font-size: 4rem"></i>
+                             <h3 class="mb-4"> {{ users }}  utilisateurs</h3>
+                              <a href="{{ path('user_index') }}" class="btn btn-success">Lister <i class="bi bi-display"></i></a>
+                             </div>
+                             <div class="col-md-1"></div>
+                             <div class="col-md-4 p-3 bg-white p-3 text-center">
+                             <i class="bi bi-book-half " style="font-size: 4rem"></i>
+                              <h3 class="mb-4">  {{ livres }}  Livres</h3>
+                     <a href="{{ path('livre_new') }}" class="btn btn-success">Ajouter <i class="bi bi-plus-circle"></i></a>
+
+                             </div>
+                                    
+                                 </div>
+                                 <div class="row p-3">
+                                 <div class="col-md-1"></div>
+                             <div class="col-md-4 p-3 bg-white p-3 text-center">
+                             <i class="bi bi-journal " style="font-size: 4rem"></i>
+                                     <h3 class="mb-4">{{ genres }}  genres</h3>
+                     <a href="{{ path('genre_new') }}" class="btn btn-success">Ajouter <i class="bi bi-plus-circle"></i></a>
+                             </div>
+<div class="col-md-1"></div>
+                             <div class="col-md-4 p-3 bg-white p-3 text-center">
+                             <i class="bi bi-person-square " style="font-size: 4rem"></i>
+                                      <h3 class="mb-4 ">{{ autheurs }}  Autheurs</h3>
+                     <a href="{{ path('autheur_new') }}" class="btn btn-success">Ajouter <i class="bi bi-plus-circle"></i></a>
+                             </div>
+                                    
+                                 </div>
+                                 </div></section>
+<!--<h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   -->
+{% endblock %}
