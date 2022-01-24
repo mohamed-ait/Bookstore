@@ -1,3 +1,1 @@
-1++ L'utilisateur inconnu a le droit juste d'effectuer la recherche par le titre de livre .
-2++ L'utilisateur authentifié a le droit de lister ou bien filtrer les livres par un ensemble des critères.
-3++ il faut mettre en place aussi un panneau de gestion pour gérer les entités: ajouter un navbar gauche qui va contenir les liens vers les fonctionnalités applicables sur les entités par l'utilisateur du type admin
+
