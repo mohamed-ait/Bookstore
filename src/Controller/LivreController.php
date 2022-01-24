@@ -149,6 +149,11 @@ class LivreController extends AbstractController
      */
     public function findByGenre(Request $request, $id, LivreRepository $livreRepository,PaginatorInterface $paginator):Response{
         $livres=$livreRepository->findByGenre($id);
+        $livres = $paginator->paginate(
+            $livres, 
+            $request->query->getInt('page', 1),
+            8/*limit per page*/
+        );
           return $this->render('livre/chercher.html.twig',['livres'=>$livres]);
       }
 

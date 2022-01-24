@@ -29,56 +29,10 @@
                                     </div>
                                     <div class="text-right mb-3">
                                          <a href="{{ path('livre_show', {'id': livre.id}) }}" class="btn btn-warning">Details<i class="bi bi-display"></i></a>
-                                         <a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn btn-success"><i class="bi bi-pen"></i></a>
+                                         {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('livre_edit', {'id': livre.id}) }}" class="btn btn-success"><i class="bi bi-pen"></i></a>{% endif %}
                                     </div>
                                     </div>
                              </div>
-                                     <!--
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Isbn</th>
-                <th>Titre</th>
-                <th>Nombre_pages</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for livre in livres %}
-            <tr>
-                <td>{{ livre.isbn }}</td>
-                <td>{{ livre.titre }}</td>
-                <td>{{ livre.nombrePages }}</td>
-                <td>
-                    <a href="{{ path('livre_show', {'id': livre.id}) }}">show</a>
-                    <a href="{{ path('livre_edit', {'id': livre.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-////////////////////////
-    <div class="col-md-3">
- <h4 class="fw-bold mb-2">{{livre.titre}}</h4>
- <i class="bi bi-book-half " style="font-size: 7rem"></i>
- 
- </div>
- <div class="col-md-3"><div class=" mb-5 fs-4">ISBN :{{livre.isbn}}</div><div class="fs-4 ">Date de parution: <br>{{ livre.datedeparution|date("Y-m-d")  }}</div></div>
- <div class="col-md-3"><div class=" mb-5 fs-4">Nombre de pages :{{livre.nombrePages}}</div><div class=" fs-4">Note :{{livre.Note}}</div></div>
- <div class="col-md-3">Autheurs : <select class="form-select mt-2 mb-4">
- {% for autheur in livre.autheurs %}
- <option value="{{autheur.nomPrenom}}">{{autheur.nomPrenom}}</option>{% endfor %}
- </select>
- <div class="col-md-3">Genres : <select class="form-select ">
- {% for genre in livre.genres %}
- <option value="{{genre.nom}}">{{genre.nom}}</option>{% endfor %}
- </select></div>
-  </div>
--->
                                 
                                  {% endfor %}
                                  <div class="d-flex justify-content-center">{{ knp_pagination_render(livres,'pagination.html.twig') }}</div> 
@@ -87,7 +41,7 @@
                          
                           
                              </section>
-    <a href="{{ path('livre_new') }}">Create new</a>
+    
    
 {% endblock %}
 
